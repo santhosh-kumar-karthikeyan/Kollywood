@@ -1,0 +1,144 @@
+body {
+    background-color: #2F2F2F;
+    font-family: 'Jersey 25','Britannic','sans-serif';
+    color:#D0A98F;
+}
+
+.body-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 90vh;
+    flex-wrap: wrap;
+    background-color: #2F2F2F;
+    margin:0;   
+    color: #D0A98F;
+}
+
+a {
+    text-decoration: none;
+    color: #D0A98F;
+}
+
+div.nav-bar {
+    display: flex;
+    width: 99vw;
+    font-size: 35px;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0px;
+    height: 50px;
+    align-items: center;
+}
+
+div.bar {
+    display : flex;
+    width: 700px;
+    gap: 100px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+div.nav-bar span:hover{
+    background-color:#444242 ;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scale: 110%
+}
+
+.image {
+    width: 300px;
+    height:300px;
+    /* margin-left: 300px; */
+}
+
+#logo {
+    font-size: 35px;
+}
+
+div.center-box {
+    border-radius: 2rem;
+    padding-top: 30px;
+    background-color:#444242 ;
+    display: flex;
+    width: 700px;
+    height: 500px;
+    flex-direction: column;
+    padding-top: 20px;
+    justify-content: flex-start;
+    row-gap: 20px;
+    align-items: center;
+    max-width: 700px;
+    /* margin-right: 150px; */
+    /* background-color: beige; */
+}
+
+
+div.head-box, div.control-box {
+    width: 200px;
+    height: 200px;
+}
+
+div.head-box {
+    width: 700px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.control-box {
+    /* background-color: wheat; */
+    height: 350px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+}
+
+#SignUpLink {
+    color: black;
+    text-decoration: none;
+    font-size: 23px;
+    margin-top: 0px;
+}
+
+#heading {
+    font-size:4rem;
+}
+
+input,button {
+    font-family: "Jersey 25",'Britannic','sans-serif';
+    font-weight: lighter;
+    font-size: 30px;
+    border-radius: 0.25rem;
+}
+
+#submit-button {
+    width: 330px;
+    /* background-color: #449DD1; */
+    background-color: #D0A98F;
+
+    border:none;
+    height: 40px;
+}
+
+#LinkHighlight {
+    text-decoration: underline;
+}
+
+.jersey-25-regular {
+    font-family: "Jersey 25", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.SignUpLink:hover {
+    scale: 110%;
+}

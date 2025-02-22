@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up for Kolywood.io</title>
+    <link rel="stylesheet" href="../css/reg_styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/357bed2f3f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav>
+        <div class="logo"><a href="index.html">Kollywood</a></div>
+        <div class="nav-links">
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="support.html">Support</a>
+            <a href="tac.html">TAC</a>
+        </div>
+    </nav>
+    <div class="body-container">
+        <div class="box1">
+            <div class="box11">Create an account</div>
+                <form action="" name = "reg-form" class="box12">
+                    <div class="ans-fields">
+                        <input type="text" name="user-name" id="user-name" placeholder="Enter your username">
+                        <div class="email-div" id = "email-div">
+                            <input type="email" name="email" id="email-primary" placeholder="Enter your email">
+                            <span id = 'tag'>@</span>
+                            <select name="email-domain" id="email-domain">
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="outlook.com">outlook.com</option>
+                                <option value="mepcoeng.ac.in">mepcoeng.ac.in</option>
+                                <option value="custom">Custom domain</option>
+                            </select>
+                            <button class="reset-btn" id = 'reset-btn' style = 'display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
+                        </div>
+                        <input type="password" name="pass-1" id="pass-1" placeholder="Enter your password">
+                        <input type="password" name="pass-2" id="pass-2" placeholder="Confirm your password">
+                    </div>
+                </form>
+                <div class="box13">
+                    <input type="submit" value = "Register" id = "reg">
+                    <p>Already a user? <a href="login.html" style = 'text-decoration:underline'>Login here</a></p>
+                </div>
+        </div>
+        <div class="box2">
+            <img src="../resources/logo/kollywood.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    let text_box = document.getElementById("email-primary");
+    let domain_box = document.getElementById("email-domain");
+    let tag = document.getElementById("tag");
+    let reset_btn = document.getElementById("reset-btn");
+    let outer_box = document.getElementById('email-div')
+    domain_box.addEventListener("change",function(evt) {
+        if(evt.target.value == 'custom') {
+            domain_box.style.display = 'none';
+            tag.style.display = 'none';
+            text_box.style.width = '100%';
+            reset_btn.style.display = 'block';
+            reset_btn.style.width = '30%';
+            text_box.style.width = '60%';
+            outer_box.style.justifyContent = 'space-evenly';
+        }
+    });
+    reset_btn.addEventListener("click",function(evt){
+        domain_box.style.display = 'block';
+        tag.style.display = 'block';
+        reset_btn.style.display = 'none';
+    });
+</script>
+</html>
