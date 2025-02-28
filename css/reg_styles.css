@@ -164,8 +164,8 @@ select {
     flex-direction: column;
 }
 
-#pass-message {
-    font-size: 1.2rem;
+#pass-message, #pass-validator {
+    font-size: 1rem;
     position: relative;
     top: -20px;
     margin: 0;
@@ -173,5 +173,9 @@ select {
     display: flex;
     align-items: center;
     gap: 10px;
+    display: none;
+}
+
+.popup-box {
     display: none;
 }

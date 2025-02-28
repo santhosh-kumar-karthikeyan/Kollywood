@@ -37,6 +37,17 @@
                             <button class="reset-btn" id = 'reset-btn' style = 'display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
                         </div>
                         <input type="password" name="pass-1" id="pass-1" placeholder="Enter your password">
+                        <p id="pass-validator"><i class="fa-solid fa-circle-xmark"></i></p>
+                        <div class="popup-box">
+                            <ul>
+                                Your password should meet the following requirements:
+                                <li>Contain 8 to 20 characters.</li>
+                                <li>Contain atleast one special character.</li>
+                                <li>Contain atleast one uppercase character.</li>
+                                <li>Contain atleast one lowercase character.</li>
+                                <li>Contain atleast one numerical character.</li>
+                            </ul>
+                        </div>
                         <input type="password" name="pass-2" id="pass-2" placeholder="Confirm your password">
                         <p id="pass-message"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
                     </div>
@@ -80,27 +91,33 @@
     //script for handling password matching
     const pass1_box = document.getElementById("pass-1");
     const pass2_box = document.getElementById("pass-2");
-    const message = document.getElementById("pass-message");
-    const successString = "<i class=\"fa-solid fa-circle-xmark\"></i> Passwords do not match";
-    const failureString = "<i class=\"fa-solid fa-circle-check\"></i> Passwords match successfully";
+    let message = document.getElementById("pass-message");
+    const failureString = "<i class=\"fa-solid fa-circle-xmark\"></i> Passwords do not match";
+    const successString = "<i class=\"fa-solid fa-circle-check\"></i> Passwords match successfully";
     const confirmFocus = false;
     const validState = false;
-    pass2_box.addEventListener("focus",function(evt) {
-        if(evt.target.value != "") 
-            confirmFocus = true;
-    });
-    pass1_box.addEventListener("focus",function(evt) {
-        if(evt.target.value != "")
-            confirmFocus = false;
+    var pass_regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    const validString = "<i class=\"fa-solid fa-circle-check\"></i> Password meets the requirements.";
+    const invalidString = "<i class=\"fa-solid fa-circle-xmark\"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span>";
+    const validation_message = document.getElementById("pass-validator");
+    pass1_box.addEventListener("input",function(evt) {
+        if(pass_regex.test(evt.target.value)) {
+            validation_message.innerHTML = validString;
+            validation_message.style.display = 'block';
+        }
+        else {
+            validation_message.innerHTML = invalidString;
+            validation_message.style.display = 'block';
+        }
     });
     pass2_box.addEventListener("input",function(evt) {
         if(evt.target.value != pass1_box.value) {
-            message.innerHTML = successString;
+            message.innerHTML = failureString;
             message.style.display = 'block';
         }
-        else if(evt.target.value == pass1_box.value) {
+        else if(evt.target.value == pass1_box.value && evt.target.value != "") {
             message.style.display = 'block';
-            message.innerHTML = failureString;
+            message.innerHTML = successString;
         }
     });
 </script>
