@@ -38,8 +38,10 @@
                         </div>
                         <input type="password" name="pass-1" id="pass-1" placeholder="Enter your password">
                         <input type="password" name="pass-2" id="pass-2" placeholder="Confirm your password">
+                        <p id="pass-message"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
                     </div>
                 </form>
+
                 <div class="box13">
                     <input type="submit" value = "Register" id = "reg">
                     <p>Already a user? <a href="login.html" style = 'text-decoration:underline'>Login here</a></p>
@@ -51,11 +53,12 @@
     </div>
 </body>
 <script>
-    let text_box = document.getElementById("email-primary");
-    let domain_box = document.getElementById("email-domain");
-    let tag = document.getElementById("tag");
-    let reset_btn = document.getElementById("reset-btn");
-    let outer_box = document.getElementById('email-div')
+    //script for handling the domain changing logic
+    const text_box = document.getElementById("email-primary");
+    const domain_box = document.getElementById("email-domain");
+    const tag = document.getElementById("tag");
+    const reset_btn = document.getElementById("reset-btn");
+    const outer_box = document.getElementById('email-div')
     domain_box.addEventListener("change",function(evt) {
         if(evt.target.value == 'custom') {
             domain_box.style.display = 'none';
@@ -71,6 +74,34 @@
         domain_box.style.display = 'block';
         tag.style.display = 'block';
         reset_btn.style.display = 'none';
+    });
+</script>
+<script>
+    //script for handling password matching
+    const pass1_box = document.getElementById("pass-1");
+    const pass2_box = document.getElementById("pass-2");
+    const message = document.getElementById("pass-message");
+    const successString = "<i class=\"fa-solid fa-circle-xmark\"></i> Passwords do not match";
+    const failureString = "<i class=\"fa-solid fa-circle-check\"></i> Passwords match successfully";
+    const confirmFocus = false;
+    const validState = false;
+    pass2_box.addEventListener("focus",function(evt) {
+        if(evt.target.value != "") 
+            confirmFocus = true;
+    });
+    pass1_box.addEventListener("focus",function(evt) {
+        if(evt.target.value != "")
+            confirmFocus = false;
+    });
+    pass2_box.addEventListener("input",function(evt) {
+        if(evt.target.value != pass1_box.value) {
+            message.innerHTML = successString;
+            message.style.display = 'block';
+        }
+        else if(evt.target.value == pass1_box.value) {
+            message.style.display = 'block';
+            message.innerHTML = failureString;
+        }
     });
 </script>
 </html>
