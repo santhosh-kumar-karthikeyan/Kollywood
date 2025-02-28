@@ -15,7 +15,7 @@
     <div class="nav-bar">
         <div class="logo"><a href="index.html">Kollywood</a></div>
         <div class="nav-links">
-            <a href="leaderboard.html">How to play?</a>
+            <a href="rules.html">How to play?</a>
             <a href="support.html">Support</a>
             <a href="tac.html">TAC</a>
             <a href="login.html">Login</a>
@@ -119,4 +119,15 @@
         </div>
     </div>
 </body>
+<script>
+    let rowClassifier = document.getElementById("row-count");
+    rowClassifier.addEventListener("change",function(evt){
+        if(evt.target.value==="10") {
+            //After adding DB, write code for extracting top 10 from the db and append into the table
+        }
+        else if(evt.target.value === "50") {
+
+        }
+    });
+</script>
 </html>
