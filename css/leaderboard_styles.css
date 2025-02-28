@@ -6,8 +6,8 @@ body {
     background-color: #2F2F2F;
     font-family: 'Jersey 25','Britannic','sans-serif';
     color:#D0A98F;
+    gap: 50px;
     font-size: 3rem;
-    height: 98vh;
 }
 
 a {
@@ -16,11 +16,15 @@ a {
     font-size: inherit;
 }
 
-nav {
+
+
+.nav-bar {
     width: 100%;
+    height: 20%;
     display: flex;
     justify-content: space-around;
     padding-top: 20px;
+    font-size: 2rem;
 }
 
 .nav-links {
@@ -41,23 +45,15 @@ nav {
 .box11 {
     background-color: #444242;
     width: 90%;
-    height: 95%;
+    min-height: 95%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     margin-top:10px;
     padding-bottom: 50px;
     flex-direction: column;
+    gap:0;
     border-radius: 5px;
-}
-
-.table {
-    background-color: #2F2F2F;
-    width: 95%;
-    min-height: 75%;
-    overflow-y: auto;
-    display: grid;
-
 }
 
 .accessories-bottom {
@@ -67,7 +63,7 @@ nav {
     width: 95%;
 }
 
-select,button {
+select,button,input {
     font: inherit;
     font-size: 1.75rem; 
     border-radius: 5px;
@@ -84,5 +80,69 @@ select,button {
 
 #title-bar {
     font-size: 2.5rem;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
 
+table {
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    border: 2px solid #D0A98F;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    width: 95%;
+    overflow-y: scroll;
+  }
+
+td, th {
+  padding: 10px 20px;
+}
+
+th {
+  background-color: #444242;
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: #444242;
+}
+
+tr:nth-child(odd) td {
+  background-color: #343232;
+}
+
+caption {
+  padding: 10px;
+}
+
+.filter-box {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  width: 20%;
+}
+
+.accessories-top {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+input {
+  font-size: 1.75rem;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  align-items: center;
 }
