@@ -36,9 +36,9 @@
                             </select>
                             <button class="reset-btn" id = 'reset-btn' style = 'display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
                         </div>
-                        <input type="password" name="pass-1" id="pass-1" placeholder="Enter your password">
-                        <p id="pass-validator"><i class="fa-solid fa-circle-xmark"></i></p>
-                        <div class="popup-box">
+                        <input type="password" name="pass-1" id="pass-1" placeholder="Enter your password" required>
+                        <p id="pass-validator"><i class=\"fa-solid fa-circle-xmark\"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span></p>
+                        <div class="popup-box" id="popup-box">
                             <ul>
                                 Your password should meet the following requirements:
                                 <li>Contain 8 to 20 characters.</li>
@@ -100,25 +100,42 @@
     const validString = "<i class=\"fa-solid fa-circle-check\"></i> Password meets the requirements.";
     const invalidString = "<i class=\"fa-solid fa-circle-xmark\"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span>";
     const validation_message = document.getElementById("pass-validator");
+    const popup_text = document.getElementById("popup");
+    const popupBox = document.getElementById("popup-box");
+    popup_text.addEventListener("mouseover",function(evt){
+        popupBox.style.display = 'block';
+    });
+    popup_text.addEventListener("mouseout",function(evt) {
+        popupBox.style.display = 'none';
+    });
     pass1_box.addEventListener("input",function(evt) {
-        if(pass_regex.test(evt.target.value)) {
-            validation_message.innerHTML = validString;
+        if(evt.target.value != "") {
             validation_message.style.display = 'block';
+            if(!pass_regex.test(evt.target.value)) {
+                validation_message.innerHTML = invalidString;
+            }
+            else {
+                validation_message.innerHTML = validString;
+            }
         }
         else {
-            validation_message.innerHTML = invalidString;
-            validation_message.style.display = 'block';
+            validation_message.style.display = 'none';
         }
     });
     pass2_box.addEventListener("input",function(evt) {
-        if(evt.target.value != pass1_box.value) {
-            message.innerHTML = failureString;
+        if(evt.target.value != "") {
             message.style.display = 'block';
+            if(evt.target.value != pass1_box.value) {
+                message.innerHTML = failureString;
+            }
+            else {
+                message.innerHTML = successString;
+            }
         }
-        else if(evt.target.value == pass1_box.value && evt.target.value != "") {
-            message.style.display = 'block';
-            message.innerHTML = successString;
+        else {
+            message.style.display = 'none';
         }
     });
+
 </script>
 </html>

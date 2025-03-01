@@ -178,4 +178,12 @@ select {
 
 .popup-box {
     display: none;
+    position: absolute;
+    background-color: rgba(150,150,150,0.5);
+    border-radius: 5px;
+    padding: 10px;
+    backdrop-filter: blur(30px);
+    transform: translateX(30%) translateY(-25%);
+    color: #444242;
 }
+
