@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "express": "^4.21.2",
+    "path": "^0.12.7",
     "querystring": "^0.2.1",
     "ws": "^8.18.0"
   }
