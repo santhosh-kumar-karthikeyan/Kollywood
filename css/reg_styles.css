@@ -165,18 +165,31 @@ select {
     flex-direction: column;
 }
 
-#pass-message, #pass-validator {
+#pass-validator, #pass-message {
     font-size: 1rem;
-    position: relative;
-    top: -20px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    display: none;
+    color: red; /* Change color to red for error messages */
+    margin: 5px 0; /* Add some margin for spacing */
+    display: none; /* Keep it hidden by default */
+    position: absolute;
 }
 
+#pass-validator {
+    top: 72%;
+}
+
+#pass-message {
+    top: 98%;
+}
+.ans-fields {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    width: 70%;
+    height: 100%;
+    font-size: 1.75rem;
+    position: relative; /* Ensure relative positioning for absolute children */
+}
 .popup-box {
     display: none;
     position: absolute;

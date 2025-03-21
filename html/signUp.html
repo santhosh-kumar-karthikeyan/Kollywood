@@ -22,38 +22,38 @@
         <div class="body-container">
             <div class="box1">
                 <div class="box11">Create an account</div>
-                    <form action="http://localhost:5000/validateSignup" name = "reg-form" class="box12" method = "POST">
+                    <form action="http://localhost:5000/validateSignup" name="reg-form" class="box12" method="POST">
                         <div class="ans-fields">
                             <input type="text" name="username" id="user-name" placeholder="Enter your username">
-                            <div class="email-div" id = "email-div">
+                            <div class="email-div" id="email-div">
                                 <input type="email" name="email" id="email-primary" placeholder="Enter your email">
-                                <span id = 'tag'>@</span>
+                                <span id='tag'>@</span>
                                 <select name="domain" id="email-domain">
                                     <option value="gmail.com">gmail.com</option>
                                     <option value="outlook.com">outlook.com</option>
                                     <option value="mepcoeng.ac.in">mepcoeng.ac.in</option>
                                     <option value="custom">Custom domain</option>
                                 </select>
-                                <button class="reset-btn" id = 'reset-btn' style = 'display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
+                                <button class="reset-btn" id='reset-btn' style='display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
                             </div>
                             <input type="password" name="pass1" id="pass-1" placeholder="Enter your password" required>
-                            <p id="pass-validator"><i class=\"fa-solid fa-circle-xmark\"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span></p>
+                            <p id="pass-validator" style="display: none;"><i class="fa-solid fa-circle-xmark"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span></p>
                             <div class="popup-box" id="popup-box">
                                 <ul>
                                     Your password should meet the following requirements:
                                     <li>Contain 8 to 20 characters.</li>
-                                    <li>Contain atleast one special character.</li>
-                                    <li>Contain atleast one uppercase character.</li>
-                                    <li>Contain atleast one lowercase character.</li>
-                                    <li>Contain atleast one numerical character.</li>
+                                    <li>Contain at least one special character.</li>
+                                    <li>Contain at least one uppercase character.</li>
+                                    <li>Contain at least one lowercase character.</li>
+                                    <li>Contain at least one numerical character.</li>
                                 </ul>
                             </div>
                             <input type="password" name="pass2" id="pass-2" placeholder="Confirm your password">
-                            <p id="pass-message"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
+                            <p id="pass-message" style="display: none;"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
                         </div>
                         <div class="box13">
-                            <input type="submit" value = "Register" id = "reg">
-                            <p>Already a user? <a href="login.html" style = 'text-decoration:underline'>Login here</a></p>
+                            <input type="submit" value="Register" id="reg">
+                            <p>Already a user? <a href="login.html" style='text-decoration:underline'>Login here</a></p>
                         </div>
                     </form>
             </div>
@@ -112,9 +112,11 @@
             validation_message.style.display = 'block';
             if(!pass_regex.test(evt.target.value)) {
                 validation_message.innerHTML = invalidString;
+                validation_message.style.color = 'red';
             }
             else {
                 validation_message.innerHTML = validString;
+                validation_message.style.color = 'green';
             }
         }
         else {
@@ -126,9 +128,11 @@
             message.style.display = 'block';
             if(evt.target.value != pass1_box.value) {
                 message.innerHTML = failureString;
+                message.style.color = 'red';
             }
             else {
                 message.innerHTML = successString;
+                message.style.color = 'green';
             }
         }
         else {
