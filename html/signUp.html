@@ -10,59 +10,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Jersey+25&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/357bed2f3f.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <nav>
-        <div class="logo"><a href="index.html">Kollywood</a></div>
-        <div class="nav-links">
-            <a href="leaderboard.html">Leaderboard</a>
-            <a href="support.html">Support</a>
-            <a href="tac.html">TAC</a>
-        </div>
-    </nav>
-    <div class="body-container">
-        <div class="box1">
-            <div class="box11">Create an account</div>
-                <form action="" name = "reg-form" class="box12">
-                    <div class="ans-fields">
-                        <input type="text" name="user-name" id="user-name" placeholder="Enter your username">
-                        <div class="email-div" id = "email-div">
-                            <input type="email" name="email" id="email-primary" placeholder="Enter your email">
-                            <span id = 'tag'>@</span>
-                            <select name="email-domain" id="email-domain">
-                                <option value="gmail.com">gmail.com</option>
-                                <option value="outlook.com">outlook.com</option>
-                                <option value="mepcoeng.ac.in">mepcoeng.ac.in</option>
-                                <option value="custom">Custom domain</option>
-                            </select>
-                            <button class="reset-btn" id = 'reset-btn' style = 'display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
+    <body>
+        <nav>
+            <div class="logo"><a href="index.html">Kollywood</a></div>
+            <div class="nav-links">
+                <a href="leaderboard.html">Leaderboard</a>
+                <a href="support.html">Support</a>
+                <a href="tac.html">TAC</a>
+            </div>
+        </nav>
+        <div class="body-container">
+            <div class="box1">
+                <div class="box11">Create an account</div>
+                    <form action="http://localhost:5000/validateSignup" name = "reg-form" class="box12" method = "POST">
+                        <div class="ans-fields">
+                            <input type="text" name="username" id="user-name" placeholder="Enter your username">
+                            <div class="email-div" id = "email-div">
+                                <input type="email" name="email" id="email-primary" placeholder="Enter your email">
+                                <span id = 'tag'>@</span>
+                                <select name="domain" id="email-domain">
+                                    <option value="gmail.com">gmail.com</option>
+                                    <option value="outlook.com">outlook.com</option>
+                                    <option value="mepcoeng.ac.in">mepcoeng.ac.in</option>
+                                    <option value="custom">Custom domain</option>
+                                </select>
+                                <button class="reset-btn" id = 'reset-btn' style = 'display: none'><i class="fa-solid fa-arrows-rotate"></i></button>
+                            </div>
+                            <input type="password" name="pass1" id="pass-1" placeholder="Enter your password" required>
+                            <p id="pass-validator"><i class=\"fa-solid fa-circle-xmark\"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span></p>
+                            <div class="popup-box" id="popup-box">
+                                <ul>
+                                    Your password should meet the following requirements:
+                                    <li>Contain 8 to 20 characters.</li>
+                                    <li>Contain atleast one special character.</li>
+                                    <li>Contain atleast one uppercase character.</li>
+                                    <li>Contain atleast one lowercase character.</li>
+                                    <li>Contain atleast one numerical character.</li>
+                                </ul>
+                            </div>
+                            <input type="password" name="pass2" id="pass-2" placeholder="Confirm your password">
+                            <p id="pass-message"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
                         </div>
-                        <input type="password" name="pass-1" id="pass-1" placeholder="Enter your password" required>
-                        <p id="pass-validator"><i class=\"fa-solid fa-circle-xmark\"></i> Password doesn't meet the requirements. Check the requirements <span id='popup'>here</span></p>
-                        <div class="popup-box" id="popup-box">
-                            <ul>
-                                Your password should meet the following requirements:
-                                <li>Contain 8 to 20 characters.</li>
-                                <li>Contain atleast one special character.</li>
-                                <li>Contain atleast one uppercase character.</li>
-                                <li>Contain atleast one lowercase character.</li>
-                                <li>Contain atleast one numerical character.</li>
-                            </ul>
+                        <div class="box13">
+                            <input type="submit" value = "Register" id = "reg">
+                            <p>Already a user? <a href="login.html" style = 'text-decoration:underline'>Login here</a></p>
                         </div>
-                        <input type="password" name="pass-2" id="pass-2" placeholder="Confirm your password">
-                        <p id="pass-message"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
-                    </div>
-                </form>
-
-                <div class="box13">
-                    <input type="submit" value = "Register" id = "reg">
-                    <p>Already a user? <a href="login.html" style = 'text-decoration:underline'>Login here</a></p>
-                </div>
+                    </form>
+            </div>
+            <div class="box2">
+                <img src="../resources/logo/kollywood.png" alt="">
+            </div>
         </div>
-        <div class="box2">
-            <img src="../resources/logo/kollywood.png" alt="">
-        </div>
-    </div>
-</body>
+    </body>
 <script>
     //script for handling the domain changing logic
     const text_box = document.getElementById("email-primary");
@@ -136,6 +135,22 @@
             message.style.display = 'none';
         }
     });
-
 </script>
+<!-- <script>
+    //script to validate username
+    const username = document.getElementById("user-name").value;
+    fetch("https://localhost:5000/checkUsername",{
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({username: `${username}`})
+    }).then(response => response.json)
+    .then(
+        data => {
+            if(data.exists) {
+
+            }
+        }
+    )
+    )
+</script> -->
 </html>
