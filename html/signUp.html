@@ -101,18 +101,24 @@
     const validation_message = document.getElementById("pass-validator");
     const popup_text = document.getElementById("popup");
     const popupBox = document.getElementById("popup-box");
+    popup_text.addEventListener("click",evt => {
+        console.log("Clicked");
+    });
     popup_text.addEventListener("mouseover",function(evt){
+        console.log("hovered over");
         popupBox.style.display = 'block';
     });
-    popup_text.addEventListener("mouseout",function(evt) {
+    popup_text.addEventListener("mouseleave",function(evt) {
         popupBox.style.display = 'none';
     });
     pass1_box.addEventListener("input",function(evt) {
         if(evt.target.value != "") {
             validation_message.style.display = 'block';
+            popup_text.style.display = 'block';
             if(!pass_regex.test(evt.target.value)) {
                 validation_message.innerHTML = invalidString;
                 validation_message.style.color = 'red';
+                console.log(popup_text.style.display);
             }
             else {
                 validation_message.innerHTML = validString;

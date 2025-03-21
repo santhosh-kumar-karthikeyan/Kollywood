@@ -199,8 +199,14 @@ select {
     backdrop-filter: blur(30px);
     transform: translateX(30%) translateY(-25%);
     color: #444242;
+    z-index: 1000;
 }
 
 #reg:hover {
     scale: transform(110%);
+}
+
+#popup {
+    text-decoration: underline;
+    cursor: pointer;
 }
