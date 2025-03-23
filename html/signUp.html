@@ -24,11 +24,11 @@
                 <div class="box11">Create an account</div>
                     <form action="http://localhost:5000/validateSignup" name="reg-form" class="box12" method="POST">
                         <div class="ans-fields">
-                            <input type="text" name="username" id="user-name" placeholder="Enter your username">
+                            <input type="text" name="username" id="user-name" placeholder="Enter your username" required>
                             <div class="email-div" id="email-div">
-                                <input type="email" name="email" id="email-primary" placeholder="Enter your email">
+                                <input type="text" name="email" id="email-primary" placeholder="Enter your email" required>
                                 <span id='tag'>@</span>
-                                <select name="domain" id="email-domain">
+                                <select name="domain" id="email-domain" required>
                                     <option value="gmail.com">gmail.com</option>
                                     <option value="outlook.com">outlook.com</option>
                                     <option value="mepcoeng.ac.in">mepcoeng.ac.in</option>
@@ -53,7 +53,7 @@
                             <p id="pass-message" style="display: none;"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
                         </div>
                         <div class="box13">
-                            <input type="submit" value="Register" id="reg">
+                            <input type="submit" value="Register" id="reg" disabled>
                             <p>Already a user? <a href="login.html" style='text-decoration:underline'>Login here</a></p>
                         </div>
                     </form>
@@ -85,9 +85,8 @@
         domain_box.style.display = 'block';
         tag.style.display = 'block';
         reset_btn.style.display = 'none';
+        domain_box.selectedIndex = 0;
     });
-</script>
-<script>
     //script for handling password matching
     const pass1_box = document.getElementById("pass-1");
     const pass2_box = document.getElementById("pass-2");
@@ -102,6 +101,8 @@
     const validation_message = document.getElementById("pass-validator");
     const popup_text = document.getElementById("popup");
     const popupBox = document.getElementById("popup-box");
+    const submitButton = document.getElementById("reg");
+    let reqValidity = false;
     popup_text.addEventListener("click",evt => {
         console.log("Clicked");
     });
@@ -120,10 +121,13 @@
             if(!pass_regex.test(evt.target.value)) {
                 validation_message.innerHTML = invalidString;
                 validation_message.style.color = 'red';
+                reqValidity = false;
+                pass2_box.value = "";
             }
             else {
                 validation_message.innerHTML = validString;
                 validation_message.style.color = 'green';
+                reqValidity = true;
             }
         }
         else {
@@ -131,21 +135,32 @@
         }
     });
     pass2_box.addEventListener("input",function(evt) {
-        if(evt.target.value != "") {
-            message.style.display = 'block';
-            if(evt.target.value != pass1_box.value) {
-                message.innerHTML = failureString;
-                message.style.color = 'red';
+        if(evt.target.value != "" ) {
+            if(reqValidity) {
+                message.style.display = 'block';
+                if(evt.target.value != pass1_box.value) {
+                    message.innerHTML = failureString;
+                    message.style.color = 'red';
+                    submitButton.disabled = true;
+                }
+                else {
+                    message.innerHTML = successString;
+                    message.style.color = 'green';
+                    submitButton.disabled = false;
+                }
             }
             else {
-                message.innerHTML = successString;
-                message.style.color = 'green';
+                validation_message.innerHtml = invalidString;
+                validation_message.style.color = 'red';
+                reqValidity = false;
+                submitButton.disabled = true;
             }
         }
         else {
             message.style.display = 'none';
         }
     });
+
 </script>
 <!-- <script>
     //script to validate username
