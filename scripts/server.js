@@ -4,17 +4,17 @@ const path = require("path");
 const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri);
-
-async function userDB() {
+const cors = require("cors");
+app.use(cors());
+let users;
+async function fetchCollection(dbName, colName) {
     try {
-        await client.connect();
-        console.log("Connected to DB");
-        const db = client.db("users");
-        const users = db.collection("user-details");
+        const db = await client.db(dbName);
+        const users = db.collection(colName);
         return users;
     }
     catch(err) {
-        console.error("Can't connect to DB");
+        console.error("Can't fetch collection: "+err);
     }
 }
 
@@ -54,11 +54,12 @@ app.post("/validateSignup",async (req,res) => {
     }
 });
 app.post("/checkUsername",async (req,res) => {
-    const users = await userDB();
-    console.log("Connected to DB");
+    console.log("checking username");
     const {username} = req.body;
+    console.log(`Checking for presence of ${username} in DB...`);
     try {
-        const user = users.findOne({username});
+        const user = await users.findOne({username: username});
+        console.log(`Retrieved user: ${user}`);
         if(user) {
             return res.json({exists: true});
         }
@@ -69,7 +70,10 @@ app.post("/checkUsername",async (req,res) => {
         console.err("Error fetching usernames");
     }
 });
-app.listen("5000", () => {
-    const users =  userDB();
+app.listen("5000", async () => {
+    await client.connect();
+    console.log("Connected to Kollywood database...");
+    users = await fetchCollection("Kollywood","Users");
+    console.log("User database ready...");
 });
 console.log("Server listening at port 5000");

@@ -165,7 +165,7 @@ select {
     flex-direction: column;
 }
 
-#pass-validator, #pass-message {
+#pass-validator, #pass-message, #user-message {
     font-size: 1rem;
     color: red; /* Change color to red for error messages */
     margin: 5px 0; /* Add some margin for spacing */
@@ -179,6 +179,10 @@ select {
 
 #pass-message {
     top: 98%;
+}
+
+#user-message {
+    top: 19%;
 }
 .ans-fields {
     display: flex;

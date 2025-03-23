@@ -25,6 +25,7 @@
                     <form action="http://localhost:5000/validateSignup" name="reg-form" class="box12" method="POST">
                         <div class="ans-fields">
                             <input type="text" name="username" id="user-name" placeholder="Enter your username" required>
+                            <p id="user-message" style="display: none;"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match</p>
                             <div class="email-div" id="email-div">
                                 <input type="text" name="email" id="email-primary" placeholder="Enter your email" required>
                                 <span id='tag'>@</span>
@@ -93,6 +94,7 @@
     let message = document.getElementById("pass-message");
     const failureString = "<i class=\"fa-solid fa-circle-xmark\"></i> Passwords do not match";
     const successString = "<i class=\"fa-solid fa-circle-check\"></i> Passwords match successfully";
+    const userBox = document.getElementById("user-name");
     const confirmFocus = false;
     const validState = false;
     var pass_regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
@@ -160,23 +162,29 @@
             message.style.display = 'none';
         }
     });
+    //script to validate username
+    const userMessage = document.getElementById("user-message");
+    const userNameBox = document.getElementById("user-name");
+    userNameBox.addEventListener("input",evt => {
+        fetch("http://localhost:5000/checkUsername",{
+            method: "POST",
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify({username: `${userNameBox.value}`})
+        }).then(response => response.json())
+        .then(
+            data => {
+                userMessage.style.display = 'block';
+                if(data.exists) {
+                    userMessage.style.color = "red";
+                    userMessage.innerHTML = "<i class=\"fa-solid fa-circle-xmark\"></i> Username exists."
+                }
+                else {
+                    userMessage.style.color = 'green';
+                    userMessage.innerHTML = '<i class=\"fa-solid fa-circle-check\"></i>Username available.';
+                }
+            }
+        ).catch(err => console.error("Error fetching username validity"));
+    });
 
 </script>
-<!-- <script>
-    //script to validate username
-    const username = document.getElementById("user-name").value;
-    fetch("https://localhost:5000/checkUsername",{
-        method: "POST",
-        headers: {"Content-Type" : "application/json"},
-        body: JSON.stringify({username: `${username}`})
-    }).then(response => response.json)
-    .then(
-        data => {
-            if(data.exists) {
-
-            }
-        }
-    )
-    )
-</script> -->
 </html>
