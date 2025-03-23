@@ -4,10 +4,12 @@ const path = require("path");
 const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri);
-// const bcrypt = require("bcrpyt");
+const argon = require("argon2");
 const cors = require("cors");
 app.use(cors());
 let users;
+let loggedIn = false;
+let userId = "";
 async function fetchCollection(dbName, colName) {
     try {
         const db = await client.db(dbName);
@@ -19,13 +21,8 @@ async function fetchCollection(dbName, colName) {
     }
 }
 
-async function addUser(username,email,domain,pass) {
-    const users = await userDB();
-    const query = {username: `${username}`};
-    const observedUser = await users.findOne(query);
-    if(observedUser) {
-        console.log("User already present");
-    }
+async function addUser(username,email, pass_hash) {
+    await users.insertOne({username: username, email: email, pass: pass_hash});
 }
 
 app.use(express.static(path.join(__dirname,"../")));
@@ -47,8 +44,16 @@ app.post("/validateSignup",async (req,res) => {
     //Logic for validating username and password
     console.log("Entered into website");
     const { username, email, domain, pass1} = req.body;
-    console.log("Fetched: "+username+" "+email+" "+ domain + " " + pass1);
+    let new_email = email;
+    if(domain !== "custom") {
+        new_email +=  "@" + domain;
+    }
+    const hash = await argon.hash(pass1);
+    await addUser(username,new_email,hash);
+    console.log("User added");
+    res.sendFile(path.join(__dirname,"../html/index.html"));
 });
+app.verify
 app.post("/checkUsername",async (req,res) => {
     console.log("checking username");
     const {username} = req.body;
