@@ -4,6 +4,7 @@ const path = require("path");
 const { MongoClient } = require("mongodb");
 const uri = "mongodb://localhost:27017/";
 const client = new MongoClient(uri);
+// const bcrypt = require("bcrpyt");
 const cors = require("cors");
 app.use(cors());
 let users;
@@ -45,13 +46,8 @@ app.get("/signUp",(req,res) => {
 app.post("/validateSignup",async (req,res) => {
     //Logic for validating username and password
     console.log("Entered into website");
-    const { username, email, pass1, pass2, domain} = req.body;
-    const users = await userDB();
-    const query = {username: `${username}`};
-    const observedUser = await users.findOne(query);
-    if(observedUser) {
-        res.sendFile(path.join(__dirname,"../html/signUp.html"));
-    }
+    const { username, email, domain, pass1} = req.body;
+    console.log("Fetched: "+username+" "+email+" "+ domain + " " + pass1);
 });
 app.post("/checkUsername",async (req,res) => {
     console.log("checking username");
@@ -63,8 +59,10 @@ app.post("/checkUsername",async (req,res) => {
         if(user) {
             return res.json({exists: true});
         }
-        else    
+        else {
+            usernameValidity = true;
             return res.json({exists : false});
+        }
     }
     catch(error) {
         console.err("Error fetching usernames");

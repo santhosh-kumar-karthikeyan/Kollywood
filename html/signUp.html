@@ -166,24 +166,31 @@
     const userMessage = document.getElementById("user-message");
     const userNameBox = document.getElementById("user-name");
     userNameBox.addEventListener("input",evt => {
-        fetch("http://localhost:5000/checkUsername",{
-            method: "POST",
-            headers: {"Content-Type" : "application/json"},
-            body: JSON.stringify({username: `${userNameBox.value}`})
-        }).then(response => response.json())
-        .then(
-            data => {
-                userMessage.style.display = 'block';
-                if(data.exists) {
-                    userMessage.style.color = "red";
-                    userMessage.innerHTML = "<i class=\"fa-solid fa-circle-xmark\"></i> Username exists."
+        if(evt.target.value.length < 4) {
+            userMessage.style.display = 'block';
+            userMessage.innerHTML = "<i class=\"fa-solid fa-circle-xmark\"></i> Username should be longer than 3 characters."
+        }
+        else {
+            fetch("http://localhost:5000/checkUsername",{
+                method: "POST",
+                headers: {"Content-Type" : "application/json"},
+                body: JSON.stringify({username: `${userNameBox.value}`})
+            }).then(response => response.json())
+            .then(
+                data => {
+                    userMessage.style.display = 'block';
+                    if(data.exists) {
+                        submitButton.disabled = true;
+                        userMessage.style.color = "red";
+                        userMessage.innerHTML = "<i class=\"fa-solid fa-circle-xmark\"></i> Username exists."
+                    }
+                    else {
+                        userMessage.style.color = 'green';
+                        userMessage.innerHTML = '<i class=\"fa-solid fa-circle-check\"></i>Username available.';
+                    }
                 }
-                else {
-                    userMessage.style.color = 'green';
-                    userMessage.innerHTML = '<i class=\"fa-solid fa-circle-check\"></i>Username available.';
-                }
-            }
-        ).catch(err => console.error("Error fetching username validity"));
+            ).catch(err => console.error("Error fetching username validity"));
+        }
     });
 
 </script>
