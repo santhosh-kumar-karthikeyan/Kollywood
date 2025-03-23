@@ -91,7 +91,7 @@ div.head-box {
     align-items: center;
 }
 
-div.control-box {
+form.control-box {
     /* background-color: wheat; */
     height: 350px;
     width: 700px;
@@ -121,10 +121,9 @@ input,button {
 }
 
 #submit-button {
-    width: 330px;
-    /* background-color: #449DD1; */
+    width: 100px;
+    background-color: #449DD1;
     background-color: #D0A98F;
-
     border:none;
     height: 40px;
 }
