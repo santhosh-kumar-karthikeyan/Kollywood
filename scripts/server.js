@@ -29,13 +29,16 @@ app.use(express.static(path.join(__dirname,"../")));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
 app.get("/",function(req,res) {
-    res.sendFile(path.join(__dirname,"../html/signUp.html"));
+    res.sendFile(path.join(__dirname,"../html/index.html"));
 });
 app.get("/login",function(req,res) {
     res.sendFile(path.join(__dirname,"../html/login.html"));
 });
 app.get("/leaderboard",function(req,res) {
     res.sendFile(path.join(__dirname,"../html/leaderboard.html"));
+});
+app.get("/rules",function(req,res) {
+    res.sendFile(path.join(__dirname,"../html/rules.html"))
 });
 app.get("/signUp",(req,res) => {
     res.sendFile(path.join(__dirname,"../html/signUp.html"));

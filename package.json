@@ -20,6 +20,8 @@
     "moviedb": "^0.2.12",
     "path": "^0.12.7",
     "querystring": "^0.2.1",
+    "socket-io": "^1.0.0",
+    "socket.io": "^4.8.1",
     "tailwindcss": "^4.0.14",
     "tmdbv3": "^0.1.2",
     "ws": "^8.18.0"
